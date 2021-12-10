@@ -10,13 +10,7 @@ import java.util.Collection;
  */
 public class BeanTreeHelper<T, N> extends TreeHelper<T, N> {
     public BeanTreeHelper(Class<N> nodeClazz, String codeFieldName, String parentCodeFieldName, String childrenFieldName) {
-        setNodeCreator(() -> {
-            try {
-                return nodeClazz.getConstructor().newInstance();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        setNodeCreator(() -> Functions.sneakThrows(()->nodeClazz.getConstructor().newInstance()));
         setCodeGetter(node -> (T) Reflections.getFieldValue(node, codeFieldName));
         setCodeSetter((node, value) -> Reflections.setFieldValue(node, codeFieldName, value));
         setParentCodeGetter(node -> (T) Reflections.getFieldValue(node, parentCodeFieldName));
