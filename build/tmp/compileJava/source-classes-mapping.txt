@@ -2,5 +2,11 @@ org/example/tree/Reflections.java
  org.example.tree.Reflections
 org/example/tree/BeanTreeHelper.java
  org.example.tree.BeanTreeHelper
+org/example/tree/MapTreeHelper.java
+ org.example.tree.MapTreeHelper
+org/example/tree/Functions.java
+ org.example.tree.Functions
+ org.example.tree.Functions$Fn0E
+ org.example.tree.Functions$Fn1E
 org/example/tree/TreeHelper.java
  org.example.tree.TreeHelper
