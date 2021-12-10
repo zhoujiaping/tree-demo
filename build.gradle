@@ -20,9 +20,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
-    compile 'com.mageddo.lombok:lombok-ext:2.3.4'
-    compile 'org.projectlombok:lombok:1.18.4'
-    implementation 'com.alibaba:fastjson:1.2.76'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+    testCompileOnly 'org.projectlombok:lombok:1.18.4'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.4'
 }
 
 test {
