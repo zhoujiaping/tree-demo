@@ -221,9 +221,6 @@ public class TreeHelper<CODE, NODE> {
                     childrenSetter.accept(parentNode, children);
                 }
                 children.add(node);
-                if(children.size()>2){
-                    throw new RuntimeException("xxx");
-                }
                 return null;
             });
         });
