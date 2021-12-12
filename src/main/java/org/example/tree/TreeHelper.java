@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -165,6 +166,7 @@ public class TreeHelper<CODE, NODE> {
     /**
      * 将一个节点列表转换成一颗树。
      * 该方法会修改节点的children。
+     * 需要4次遍历。
      *
      * @param nodes
      * @return
@@ -189,6 +191,45 @@ public class TreeHelper<CODE, NODE> {
         //set children
         nodes.forEach(it -> childrenSetter.accept(it, childrenMap.get(codeGetter.apply(it))));
         return roots.get(0);
+    }
+
+    /**
+     * 快速构建一颗树。
+     * 仅需两次遍历，时间复杂度为o(n)
+     *
+     * @return
+     */
+    public NODE fastTreeify(List<NODE> nodes) {
+        Map<CODE, NODE> visitedNodes = new HashMap<>();
+        List<Supplier<?>> todos = new ArrayList<>();
+        AtomicReference<NODE> root = new AtomicReference<>();
+        nodes.forEach(node -> {
+            CODE code = codeGetter.apply(node);
+            visitedNodes.put(code, node);
+            CODE parentCode = parentCodeGetter.apply(node);
+            //childrenSetter.accept(node,new ArrayList<>());
+            todos.add(() -> {
+                NODE parentNode = visitedNodes.get(parentCode);
+                if(parentNode == null){
+                    if(!root.compareAndSet(null,node)){
+                        throw new RuntimeException("too many root nodes!");
+                    }
+                    return null;
+                }
+                Collection<NODE> children = childrenGetter.apply(parentNode);
+                if (children == null) {
+                    children = new ArrayList<>();
+                    childrenSetter.accept(parentNode, children);
+                }
+                children.add(node);
+                if(children.size()>2){
+                    throw new RuntimeException("xxx");
+                }
+                return null;
+            });
+        });
+        todos.forEach(Supplier::get);
+        return root.get();
     }
 
     /**
@@ -242,7 +283,8 @@ public class TreeHelper<CODE, NODE> {
 
     /**
      * 输出漂亮的格式
-     * @param root 根节点
+     *
+     * @param root   根节点
      * @param indent 缩进字符串
      * @return
      */

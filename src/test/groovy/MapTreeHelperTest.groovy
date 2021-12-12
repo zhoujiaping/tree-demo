@@ -28,10 +28,11 @@ class MapTreeHelperTest {
         ]
         (0..<10).each {
             println "*" * 20
-            def ns = nodes.clone()
+            def ns = ObjectUtils.deepClone(nodes)
             //洗牌，打乱顺序
             ns.shuffle()
-            def root = helper.treeify(ns)
+            //def root = helper.treeify(ns)
+            def root = helper.fastTreeify(ns)
             helper.bfs(root) {
                 node, level ->
                     println "${node.id},${node.name}"

@@ -4,45 +4,22 @@
 2,main
 7,resource(test)
 6,java(test)
-4,resource(main)
 3,java(main)
+4,resource(main)
 1,src
 5,test
 7,resource(test)
 6,java(test)
 2,main
-4,resource(main)
 3,java(main)
+4,resource(main)
 1,src
 	--5,test
 ----7,resource(test)
 ----6,java(test)
 	--2,main
-----4,resource(main)
-----3,java(main)
-
-********************
-1,src
-2,main
-5,test
-3,java(main)
-4,resource(main)
-6,java(test)
-7,resource(test)
-1,src
-2,main
-3,java(main)
-4,resource(main)
-5,test
-6,java(test)
-7,resource(test)
-1,src
-	--2,main
 ----3,java(main)
 ----4,resource(main)
-	--5,test
-----6,java(test)
-----7,resource(test)
 
 ********************
 1,src
@@ -50,45 +27,22 @@
 5,test
 4,resource(main)
 3,java(main)
-6,java(test)
 7,resource(test)
+6,java(test)
 1,src
 2,main
 4,resource(main)
 3,java(main)
 5,test
-6,java(test)
 7,resource(test)
+6,java(test)
 1,src
 	--2,main
 ----4,resource(main)
 ----3,java(main)
 	--5,test
-----6,java(test)
 ----7,resource(test)
-
-********************
-1,src
-5,test
-2,main
-6,java(test)
-7,resource(test)
-4,resource(main)
-3,java(main)
-1,src
-5,test
-6,java(test)
-7,resource(test)
-2,main
-4,resource(main)
-3,java(main)
-1,src
-	--5,test
 ----6,java(test)
-----7,resource(test)
-	--2,main
-----4,resource(main)
-----3,java(main)
 
 ********************
 1,src
@@ -161,6 +115,52 @@
 
 ********************
 1,src
+5,test
+2,main
+6,java(test)
+7,resource(test)
+3,java(main)
+4,resource(main)
+1,src
+5,test
+6,java(test)
+7,resource(test)
+2,main
+3,java(main)
+4,resource(main)
+1,src
+	--5,test
+----6,java(test)
+----7,resource(test)
+	--2,main
+----3,java(main)
+----4,resource(main)
+
+********************
+1,src
+5,test
+2,main
+7,resource(test)
+6,java(test)
+3,java(main)
+4,resource(main)
+1,src
+5,test
+7,resource(test)
+6,java(test)
+2,main
+3,java(main)
+4,resource(main)
+1,src
+	--5,test
+----7,resource(test)
+----6,java(test)
+	--2,main
+----3,java(main)
+----4,resource(main)
+
+********************
+1,src
 2,main
 5,test
 3,java(main)
@@ -186,45 +186,45 @@
 1,src
 2,main
 5,test
-4,resource(main)
 3,java(main)
-7,resource(test)
+4,resource(main)
 6,java(test)
+7,resource(test)
 1,src
 2,main
-4,resource(main)
 3,java(main)
+4,resource(main)
 5,test
-7,resource(test)
 6,java(test)
+7,resource(test)
 1,src
 	--2,main
-----4,resource(main)
 ----3,java(main)
+----4,resource(main)
 	--5,test
-----7,resource(test)
 ----6,java(test)
+----7,resource(test)
 
 ********************
 1,src
-5,test
 2,main
-7,resource(test)
-6,java(test)
+5,test
 3,java(main)
 4,resource(main)
+6,java(test)
+7,resource(test)
 1,src
-5,test
-7,resource(test)
-6,java(test)
 2,main
 3,java(main)
 4,resource(main)
+5,test
+6,java(test)
+7,resource(test)
 1,src
-	--5,test
-----7,resource(test)
-----6,java(test)
 	--2,main
 ----3,java(main)
 ----4,resource(main)
+	--5,test
+----6,java(test)
+----7,resource(test)
 
