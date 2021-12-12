@@ -17,6 +17,7 @@ class BeanTreeHelperTest {
         helper.toStringFn = {
             "${it.id},${it.name}".toString()
         }
+        helper.childrenCollectionFactory = TreeSet::new
         def nodes = [
                 new Node(id:1,pid:-1,name: 'src'),
                 new Node(id:2,pid:1,name: 'main'),

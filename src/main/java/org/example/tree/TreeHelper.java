@@ -26,6 +26,7 @@ public class TreeHelper<CODE, NODE> {
     Function<NODE, Collection<NODE>> childrenGetter;
     BiConsumer<NODE, Collection<NODE>> childrenSetter;
     Function<NODE, String> toStringFn = node -> node.toString();
+    Supplier<Collection<NODE>> childrenCollectionFactory = ArrayList::new;
 
     /**
      * 有的场景，并不是一颗树，而是一个森林。
@@ -175,12 +176,11 @@ public class TreeHelper<CODE, NODE> {
         if (nodes.isEmpty()) {
             return null;
         }
-        //copy
         //code=>node
         Map<CODE, NODE> map = nodes.stream().collect(Collectors.toMap(it -> codeGetter.apply(it), it -> it));
         //code=>children
-        Map<CODE, List<NODE>> childrenMap = nodes.stream().filter(it -> parentCodeGetter.apply(it) != null)
-                .collect(Collectors.groupingBy(it -> parentCodeGetter.apply(it)));
+        Map<CODE, Collection<NODE>> childrenMap = nodes.stream().filter(it -> parentCodeGetter.apply(it) != null)
+                .collect(Collectors.groupingBy(it -> parentCodeGetter.apply(it),HashMap::new,Collectors.toCollection(childrenCollectionFactory)));
         //find roots, which parentCode not in map
         List<NODE> roots = nodes.stream().filter(
                 it -> parentCodeGetter.apply(it) == null || !map.containsKey(parentCodeGetter.apply(it))
@@ -207,7 +207,6 @@ public class TreeHelper<CODE, NODE> {
             CODE code = codeGetter.apply(node);
             visitedNodes.put(code, node);
             CODE parentCode = parentCodeGetter.apply(node);
-            //childrenSetter.accept(node,new ArrayList<>());
             todos.add(() -> {
                 NODE parentNode = visitedNodes.get(parentCode);
                 if(parentNode == null){
@@ -218,7 +217,7 @@ public class TreeHelper<CODE, NODE> {
                 }
                 Collection<NODE> children = childrenGetter.apply(parentNode);
                 if (children == null) {
-                    children = new ArrayList<>();
+                    children = childrenCollectionFactory.get();
                     childrenSetter.accept(parentNode, children);
                 }
                 children.add(node);
